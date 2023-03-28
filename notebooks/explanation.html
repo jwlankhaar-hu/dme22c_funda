@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Funda code explanation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="explanation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="explanation_files/libs/quarto-html/quarto.js"></script>
+<script src="explanation_files/libs/quarto-html/popper.min.js"></script>
+<script src="explanation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="explanation_files/libs/quarto-html/anchor.min.js"></script>
+<link href="explanation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="explanation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="explanation_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="explanation_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="explanation_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project structure</a></li>
+  <li><a href="#source-code-files-in-src" id="toc-source-code-files-in-src" class="nav-link" data-scroll-target="#source-code-files-in-src">Source code files in <code>src</code></a></li>
+  <li><a href="#settings.py" id="toc-settings.py" class="nav-link" data-scroll-target="#settings.py"><code>settings.py</code></a></li>
+  <li><a href="#prices.py" id="toc-prices.py" class="nav-link" data-scroll-target="#prices.py"><code>prices.py</code></a>
+  <ul class="collapse">
+  <li><a href="#module-imports" id="toc-module-imports" class="nav-link" data-scroll-target="#module-imports">Module imports</a></li>
+  <li><a href="#global-variables" id="toc-global-variables" class="nav-link" data-scroll-target="#global-variables">Global variables</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a></li>
+  <li><a href="#remarks-on-the-functions" id="toc-remarks-on-the-functions" class="nav-link" data-scroll-target="#remarks-on-the-functions">Remarks on the functions</a></li>
+  </ul></li>
+  <li><a href="#main.py" id="toc-main.py" class="nav-link" data-scroll-target="#main.py"><code>main.py</code></a></li>
+  <li><a href="#adding-a-command-line-interface-to-main.py" id="toc-adding-a-command-line-interface-to-main.py" class="nav-link" data-scroll-target="#adding-a-command-line-interface-to-main.py">Adding a command line interface to <code>main.py</code></a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Funda code explanation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This explanation guides you through the Funda example. It highlights the most important aspects and explains several design choices. Note that only the code in modules is discussed. The explorations in the Jupyter notebook speak for themselves.</p>
+</section>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project structure</h2>
+<p>First, we take a look at the structure of the project folder:</p>
+<pre><code>├── .git                            &lt;- Local Git repository for this project.
+├── README.md                       &lt;- A Markdown file with a project overview.
+├── data                            &lt;- Directory containing the project data.
+│&nbsp;&nbsp; └── price_list.csv
+├── .gitignore                      &lt;- Lists files to be excluded from version control.
+├── notebooks                       &lt;- Slightly less common but a good place for all 
+│&nbsp;&nbsp; ├── explanation.qmd                exploratory documents.
+│&nbsp;&nbsp; ├── funda.ipynb
+│&nbsp;&nbsp; ├── pricelist_maarssen.csv
+│&nbsp;&nbsp; ├── tmp.html
+│&nbsp;&nbsp; └── ...
+├── poetry.lock                     &lt;- Lists of ALL dependencies of the project.
+├── pyproject.toml                  &lt;- Project settings, including DIRECT dependencies.
+├── src                             &lt;- Directory with the source code
+│&nbsp;&nbsp; ├── __init__.py                    (Poetry will give it the project name by default.)
+│&nbsp;&nbsp; ├── main.py
+│&nbsp;&nbsp; ├── prices.py
+│&nbsp;&nbsp; ├── settings.py
+│&nbsp;&nbsp; └── ...
+└── tests                           &lt;- Directory with all test code that can be run
+    └── __init__.py                    with a test framework (e.g. Pytest).</code></pre>
+<p>This is a very common way to structure your project. If you use <a href="https://python-poetry.org/">Poetry</a>, to create the project, it will provide you with most of this structure by default.</p>
+<p>A few additional notes on some of the files and directories:</p>
+<ul>
+<li><p><code>.git</code>: The <code>.git</code> directory is created if you run <code>git init .</code> in the project directory and bring it under version control. It contains the project’s local Git repository. Its content is encoded and hashed and not meant for manual inspection or modification.</p></li>
+<li><p><code>.gitignore</code>: The <code>.gitignore</code> specifies which files should not be tracked by Git. These could be, for example, cache files or security keys, which should not be excluded from the repository.</p></li>
+<li><p><code>README.md</code>: It is good practice to include a <code>README.md</code> file (a <a href="https://www.markdownguide.org/">markdown file</a>) in the home directory of your project. If you add your project repository to <a href="https://github.com/">GitHub</a>, a HTML-version of this file is shown as the project’s home page.</p></li>
+<li><p><code>poetry.lock</code>/<code>pyproject.toml</code>: If you add packages to your project (e.g.&nbsp;<a href="https://pypi.org/project/requests/"><code>requests</code></a>), your project becomes dependent on that package and maybe even on the specific version of it. These dependencies themselves may as well depend on other packages (and even specific versions). Poetry manages these dependencies and helps you to create reproducible code with predictable results regardless the machine it is run on. In <code>pyproject.toml</code>, you specificy (either using Poetry or manually) the <em>direct</em> dependencies of your project, while the lock file contains <em>all</em> dependencies of the project (i.e.&nbsp;including the dependencies your direct dependencies depend on). You can regard <code>poetry.lock</code> as a cache file. You can remove it safely and Poetry will recreate it the next time you run <code>poetry update</code>.</p></li>
+<li><p><code>src</code>: <code>src</code> contains the source code (<code>.py</code> files) of your project. It is good practice to turn it into a <a href="https://docs.python.org/3/glossary.html#term-package">Python package</a> by including an empty <code>__init__.py</code> file.</p></li>
+<li><p><code>tests</code>: <code>tests</code> contains the test code (<code>.py</code> files) of your project. This code can be used to systematically run unit tests and other tests on your code. Wellknown frameworks for testing in Python are <a href="https://docs.python.org/3/library/unittest.html?highlight=unittest#module-unittest"><code>unittest</code></a> from the Python standard library and <a href="https://docs.pytest.org/"><code>pytest</code></a>. The <code>tests</code> directory is also often turned into a package by adding an empty <code>__init__.py</code> to it.</p></li>
+</ul>
+</section>
+<section id="source-code-files-in-src" class="level2">
+<h2 class="anchored" data-anchor-id="source-code-files-in-src">Source code files in <code>src</code></h2>
+<p>Organizing the logic of your code in separate files in the <code>src</code> directory can be a topic of a lot of debate. Most developers, however, have the same aim and that is to organize their code in simple building blocks that can be assembled into larger and more complex units. Therefore, it is good practice to separate the logic of your code in simple and clear units. Each unit should contain a single piece of work with a clear name and it should be more or less independent of other units.</p>
+<p>Organizing your code in a clear structure makes it better because a separate piece of work with a single and clearly defined task (<a href="https://en.wikipedia.org/wiki/Single-responsibility_principle">single responsibility principle</a>) is better testable, readable, maintainable and extensible.</p>
+<p>Some of the design decisions:</p>
+<ul>
+<li><p><code>settings.py</code> Store all parameters of your project (i.e.&nbsp;hard-coded things like file locations or URLs) in a single place. Although it adds some overhead, it makes it easy to adjust the project configuration parameters without having to make changes at many different places.</p></li>
+<li><p><code>main.py</code> This is the main entrance to the code. You can run the project with <code>python src/main.py</code>. Note that the parameters of the project (e.g.&nbsp;the destination file) are controlled by <code>settings.py</code>. Alternatively, this could also be controlled by a graphical user interface or by a command line interface. It is relatively simple to add a command line interface to your module. This is discussed <a href="#adding-a-command-line-interface-to-main.py">below</a>.</p></li>
+<li><p><code>prices.py</code> This is the module that contains the actual logic. Yet it has a clear and well-defined task: to retrieve the prices from the specified URL and save it to the specified file. Other such modules with different tasks might be added to the project later. <code>main.py</code> would than contain some more logic to control the interaction with the additional modules.</p></li>
+</ul>
+<p>The modules are discussed in more detail below.</p>
+</section>
+<section id="settings.py" class="level2">
+<h2 class="anchored" data-anchor-id="settings.py"><code>settings.py</code></h2>
+<p>The <code>settings.py</code> file starts with a short description in a docstring (<code>"""Settings module..."""</code>). This is the <a href="https://peps.python.org/pep-0257/">recommended way</a> to provide documentation in Python.</p>
+<p>For settings management, a subclass of the <code>BaseSettings</code> from <a href="https://docs.pydantic.dev/"><code>pydantic</code></a> is used. In this case, this may be a bit overkill, since a simple <code>dataclass</code> would have done as well. Pydantic offers a lot of validations, which may especially be usefull in larger project and projects with configurations that can be managed by end-users.</p>
+<p>If a data class was used instead of <code>pydantic.BaseSettings</code>, the code would have looked like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> _Settings:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> _Settings()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Classes will be studied in more detail later in the course, but a few things should be noted here.</p>
+<p>The name of the class starts with <code>_</code>, which, in Python idiom, indicates that it is meant for internal use (within the module) only. In Java, the class would have been private.</p>
+<p>With <code>settings = _Settings()</code>, the class is instantiated (i.e.&nbsp;an object of the class is created) directly after its definition. This is a quick-and-dirty way to mimic the so-called <a href="https://refactoring.guru/design-patterns/singleton">Singleton design pattern</a>, which aims to have only a single object (instance) of a class in a project. This ensures that ‘dynamic’ settings (e.g.&nbsp;creating a temporary file in the <code>_Settings</code> class) can be shared between the modules of the project.</p>
+<p>Other modules should import the <code>settings</code> object directly and not create instances of the <code>_Settings</code> class themselves:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct: </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># some_other_module.py                 </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> settings <span class="im">import</span> settings             <span class="co"># Import the settings object.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>some_setting <span class="op">=</span> settings.some_setting      <span class="co"># Use a setting.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrong:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># some_other_module.py</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> settings <span class="im">import</span> _Settings</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>presets <span class="op">=</span> _Settings()                     <span class="co"># Create a new settings object.</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>some_setting <span class="op">=</span> presets.some_setting       <span class="co"># Use a setting.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Logging is not implemented in this project, but if it would, the logger objects and settings would also be stored in the <code>settings.py</code>. These are also most often implemented according to the singleton pattern.</p>
+<p>The settings themselves are attributes of the <code>_Settings</code> class. Within the class, a defined attribute can be used right after its initialization (e.g.&nbsp;<code>base_dir</code> is used in the line following its definition).</p>
+<p>The names of all attributes of the <code>_Settings</code> class are followed by a colon and a data type (e.g.&nbsp;<code>base_dir: Path</code>). The so-called <a href="https://realpython.com/python-type-checking/"><em>type hints</em></a> form a safety mechanism that helps to detect errors with static code checkers (linters). Type hints were introduced in Python 3.5 and they are used more and more. They are optional, but they may help to detect possible bugs in an early stage of development.</p>
+<p>Note how the project root directory is stored in <code>base_dir</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>base_dir: Path <span class="op">=</span> Path(<span class="va">__file__</span>).parents[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This might seem a bit cumbersome (we could have written <code>base_dir: Path = Path.cwd()</code> as well) but it is more robust, especially when the module is imported in a Jupyter notebook.</p>
+<p><code>__file__</code> is a special variable that is available in each Python module. It contains the full filename of the module (including its path) as a string. With <code>Path(__file__)</code>, a <code>Path</code> object is created from the string. <code>parents</code> is one of its attributes and it contains the ancestors of a path:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> Path(<span class="st">'/home/code/funda/src/settings.py'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>p.parents[<span class="dv">0</span>]  <span class="co"># '/home/code/funda/src'</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>p.parents[<span class="dv">1</span>]  <span class="co"># '/home/code/funda'</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>p.parents[<span class="dv">2</span>]  <span class="co"># '/home/code'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that because all settings are stored in a single place it would not be very difficult to rewrite the module and work, for example, with a JSON file for the project configuration. Only <code>settings.py</code> would have to be modified, while all other modules could remain unchanged.</p>
+</section>
+<section id="prices.py" class="level2">
+<h2 class="anchored" data-anchor-id="prices.py"><code>prices.py</code></h2>
+<p>The file <code>prices.py</code> contains all the ‘business logic’ of the project. It starts with a docstring, the import of the required modules and the definition of some global variables. Most of the file consists of function definitions.</p>
+<section id="module-imports" class="level3">
+<h3 class="anchored" data-anchor-id="module-imports">Module imports</h3>
+<p>Note that most <code>import</code> statements import entire modules (e.g.&nbsp;<code>import csv</code>). This is recommended to avoid conflicts in variable names. <code>Path</code> and <code>settings</code> are exceptions, because they are very often used and it would be tedious and less readable to write <code>pathlib.Path</code> or <code>settings.settings</code> each time.</p>
+</section>
+<section id="global-variables" class="level3">
+<h3 class="anchored" data-anchor-id="global-variables">Global variables</h3>
+<p>Some options are stored in global variables (e.g.&nbsp;<code>HEADERS</code>). This makes it clear in the code that their values are governed on a global (project or module) level.</p>
+</section>
+<section id="functions" class="level3">
+<h3 class="anchored" data-anchor-id="functions">Functions</h3>
+<p>The file contains quite a few functions. In some cases, it might seem overkill to use a function, but there still may be good reasons to do so. In any case, deciding which code to put in a function and how to name them is an art. There are no strict rules and different developers will make different (design) choices.</p>
+<p>Although functions are primarily meant to prevent copying the same (or slightly modified) code over and over again, they also help to separate very specific logic (which may need to be modified more often) from more general logic and to isolate complexities that need to be tested more thoroughly. In addition, moving complexities to a function and label them with a clear (function) name makes code more readable.</p>
+<p>The order of the function definitions is actually not important for Python but to increase readability it is good practice to try to organize them in a logical order.</p>
+<p>All functions have type annotions on their arguments (e.g.&nbsp;<code>base_url: str</code>). If the function is used in another module (e.g.&nbsp;<code>from prices import export_prices</code>), VS Code will detect it if another data type is fed into the function. Also the return type of the function is specified using the arrow notation (<code>-&gt; list[str]</code>). The use of type hints is optional. You don’t have to use them and in some cases it may complicate matters more than it helps.</p>
+</section>
+<section id="remarks-on-the-functions" class="level3">
+<h3 class="anchored" data-anchor-id="remarks-on-the-functions">Remarks on the functions</h3>
+<section id="export_prices" class="level4">
+<h4 class="anchored" data-anchor-id="export_prices"><code>export_prices()</code></h4>
+<ul>
+<li>The ‘main’ function of the module that controls the main flow of the module is a short function, but it calls three other functions in the module (<code>construct_page_urls()</code>, <code>search()</code> and <code>price_row()</code>) that each, in turn, call other functions.</li>
+<li><code>price_list</code> is filled using a <a href="https://docs.python.org/3/tutorial/datastructures.html?highlight=list%20comprehension#list-comprehensions">list comprehension</a>.</li>
+<li>The CSV file is opened with a context manager (<code>with open(...)</code>), which is the recommended way of opening a file. If an error occurs, the context manager will automatically close the file properly.</li>
+<li>The options for the CSV file (e.g.&nbsp;which delimiter should be used) are controlled by <code>CSV_OPTIONS</code>, which is a dictionary. The <code>**</code> operator unpacks the dictionary and turns it into a list of named arguments. This is called <a href="https://docs.python.org/3/tutorial/controlflow.html#tut-unpacking-arguments"><em>argument unpacking</em></a>. Hence, the options defined in <code>settings.csv_options</code> (in <code>settings.py</code>) are directly passed to the CSV writer.</li>
+</ul>
+</section>
+<section id="get_html" class="level4">
+<h4 class="anchored" data-anchor-id="get_html"><code>get_html()</code></h4>
+<ul>
+<li>Makes a web request and receives its response.</li>
+<li>The error handling is rather basic. In case of network or web requests, things might easily go wrong, so in a real-world situation, this might need more attention (e.g.&nbsp;using <code>try ... except ...</code> and retries).</li>
+<li>The status code of the response (a code defined in the <a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">HTTP protocol</a>) is defined in the <code>HTTPStatus</code> enumeration in the <code>http</code> module of the standard library. We could as well have written <code>if resp.status_code == 200</code> but for reasons of readability it is generally preferrable to avoid hard-coded ‘magic’ numbers. The name <code>HTTPStatus.OK</code> makes it very clear what we are checking even for those who are not familiar with the HTTP protocol and status code 200.</li>
+</ul>
+</section>
+<section id="construct_page_urls" class="level4">
+<h4 class="anchored" data-anchor-id="construct_page_urls"><code>construct_page_urls()</code></h4>
+<ul>
+<li>This function contains some specific logic that typically may have to be modified sooner than other code in the project. If Funda decides to redesign their website and use a different pagination system, this function would have to rewritten.</li>
+<li>To find the maximum number of pages, a generator expression (comparable to a list comprehension) is used as an argument to the <code>max()</code> function.</li>
+</ul>
+</section>
+<section id="search" class="level4">
+<h4 class="anchored" data-anchor-id="search"><code>search()</code></h4>
+<ul>
+<li>This function also contains some specific logic that depends on how the Funda website organizes the search results (using <code>&lt;li class="search_result"&gt;... &lt;/li&gt;</code>).</li>
+</ul>
+</section>
+<section id="price_row" class="level4">
+<h4 class="anchored" data-anchor-id="price_row"><code>price_row()</code></h4>
+<p>This function calls the more business-specific parse functions and communicates very clearly what a price row comprises.</p>
+</section>
+<section id="parse_address-and-parse_price" class="level4">
+<h4 class="anchored" data-anchor-id="parse_address-and-parse_price"><code>parse_address()</code> and <code>parse_price()</code></h4>
+<p>These functions both call their <code>clean_</code> counterpart and you might debate whether these shouldn’t be incorporated in the <code>parse_</code> functions themselves. However, because cleaning may involve quite some steps (as in <code>clean_price</code>) that may be subject to change and because code is generally easier to understand when the same steps are followed for the same things (so a parse and a clean step for both address and price), we separate them.</p>
+</section>
+<section id="clean_address-and-clean_price" class="level4">
+<h4 class="anchored" data-anchor-id="clean_address-and-clean_price"><code>clean_address()</code> and <code>clean_price()</code></h4>
+<ul>
+<li><code>clean_address()</code> is very simple and it seems overkill to define a function for it. However, the Funda website might change in the future, making it necessary to add more cleaning steps.</li>
+<li><code>clean_price()</code> applies so-called method chaining, which means that the same method as called repeatedly in a single statement.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="main.py" class="level2">
+<h2 class="anchored" data-anchor-id="main.py"><code>main.py</code></h2>
+<p>The <code>main.py</code> file is the entry point for the project code. It can be run either directly from the command line using:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> src/main.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or, it could be imported into another project. Then it would read (depending on the exact package name etc.) something like:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> funda</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>funda.main(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Despite its name, <code>funda.main</code> would not be the main entry point of that project in the latter case.</p>
+<p>To be able adjust the behavior of a module to these two use cases, Python provides the following (very common) construction:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mymodule.py</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> myfunc():   <span class="co"># The function definition.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    myfunc()    <span class="co"># The function call.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If <code>mymodule.py</code> is run on its own from the command line using <code>python mymodule.py</code>, the variable <code>__name__</code> will have the value <code>"__main__"</code> and the function <code>myfunc</code> will be both defined and called.</p>
+<p>If <code>mymodule.py</code> is imported into another module <code>import mymodule</code>, the variable <code>__name__</code> will have another value and then the function <code>myfunc</code> will be defined but not called.</p>
+</section>
+<section id="adding-a-command-line-interface-to-main.py" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-command-line-interface-to-main.py">Adding a command line interface to <code>main.py</code></h2>
+<p>As pointed out <a href="#source-code-files-in-src">above</a>, we have chosen to control the parameters of the project (e.g.&nbsp;the path and name of the destination file) by the <code>settings.py</code> module. We could as well have chosen to add a command line interface to it. Then, we would for example be able to specify the destination file on the command line. For example:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> src/main.py <span class="at">--dest_file</span><span class="op">=</span>data/other_file.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are several options for adding a command line interface to your project. You can use third-party packages (e.g.&nbsp;<a href="https://click.palletsprojects.com/">click</a>) or you can use the package <a href="https://docs.python.org/3/library/argparse.html?highlight=argparse#module-argparse"><code>argparse</code></a> from the standard library.</p>
+<p>If we use <code>argparse</code>, our <code>main.py</code> would look like:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> argparse</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Other imports and body remain the same.</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>... </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> argparse.ArgumentParser()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    parser.add_argument(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'--dest_file'</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">type</span><span class="op">=</span>Path, </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">help</span><span class="op">=</span><span class="st">'The destination file (CSV) of exported prices.'</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        required<span class="op">=</span><span class="va">True</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    args <span class="op">=</span> parser.parse_args()</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    base_url <span class="op">=</span> settings.url</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    csv_file <span class="op">=</span> args.dest_file  <span class="co"># Use command line argument instead of setting.</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    main(base_url, csv_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that the parser is added to the conditional part of the module (below <code>if __name___ == ...</code>), which makes sense because we only use this interface if the module is run as the main module.</p>
+<p>You can recognize three steps:</p>
+<ol type="1">
+<li><p>Create an <code>ArgumentParser</code> object. This does the magic.</p></li>
+<li><p>Configure the parser object (i.e.&nbsp;make it recognize one argument <code>--dest_file</code>).</p></li>
+<li><p>Let the parser do the actual parsing.</p></li>
+</ol>
+<p>After these steps, the object <code>args</code> is available with the arguments as attributes.</p>
+<p>Note that <code>argparse</code> provides some nice functionality out of the box. If you run the file but forget to specify the destination, an error message is shown:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">usage:</span> main.py [-h] <span class="at">--dest_file</span> DEST_FILE</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">main.py:</span> error: the following arguments are required: <span class="at">--dest_file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also print a help message from the command line with the <code>-h</code> option that is added by default:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> src/main.py <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>shows:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">usage:</span> main.py [-h] <span class="at">--dest_file</span> DEST_FILE</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">optional</span> arguments:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-h,</span> <span class="at">--help</span>            show this help message and exit</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">--dest_file</span> DEST_FILE</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                        <span class="ex">The</span> destination file <span class="er">(</span><span class="ex">CSV</span><span class="kw">)</span> <span class="ex">of</span> exported prices.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>argparse</code> package provides a lot more functionality that allows you to create advanced command line interfaces. You can read more about it in the <a href="https://docs.python.org/3/howto/argparse.html?highlight=argparse#argparse-tutorial">Argparse Tutorial</a> on the Python website.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
